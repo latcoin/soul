@@ -1,0 +1,130 @@
+<html>
+
+<head>
+	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'> </script>
+
+</head>
+
+
+<script type='text/javascript'>
+
+	function showProfile(){
+		$.ajax({
+			url: '/ProfileInfo',
+			type: "GET",
+			data: {
+				requestedUser: 'natha.tru.5',
+				loggedUser: 'neil.haran',
+				token: 'AAAF1LA4ala8BAPtSz7EJgT7r1juTlYaJDOsYDmktRon80vm7ZAyUp5u0XCLfZB4LMs33npwQw3BbPSzGzK2yoLXKJBZCQNWIFtETHRV1gZDZD'
+			},
+			dataType: "json",
+			success: function(data){
+				//alert(data.name);
+        //$("#nameOwnwer").html(data.name);
+			}
+		});
+	}
+
+</script>
+
+<body>
+	<p>Hola Mundo!!</p>
+	<input type='button' value='Acceder' onclick='myFunction()' />
+	<br />
+	<input type='button' value='Get Profile Info' onclick="showProfile()"/>
+</body>
+
+
+</html>
+
+<!--
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+  <body>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <div id="fb-root"></div>
+    <script>
+      FB.init({appId: '410307052344751', xfbml: true, cookie: true});
+
+      FB.ui({
+          method: 'send',
+          to: 'alex.ochoam',
+          description: '@Soul is a revealing new way to explore your personality. In 3 easy steps you\'ll gain a better understanding of yourself and your relationship with others.',
+          name: '@Soul Test me!',
+          link: 'http://www.nytimes.com/2011/06/15/arts/people-argue-just-to-win-scholars-assert.html',
+          });
+     </script>
+  </body>
+</html>
+-->
+
+<!--
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:fb="https://www.facebook.com/2008/fbml">
+  <head>
+    <title>My Feed Dialog Page</title>
+  </head>
+  <body>
+    <div id='fb-root'></div>
+    <script src='http://connect.facebook.net/en_US/all.js'></script>
+    <p><a onclick='postToFeed(); return false;'>Share my result!</a></p>
+    <p id='msg'></p>
+
+    <script> 
+      FB.init({appId: "410307052344751", status: true, cookie: true});
+
+      function postToFeed() {
+
+        // calling the API ...
+        var obj = {
+          method: 'feed',
+          link: 'https://developers.facebook.com/docs/reference/dialogs/',
+          picture: 'http://fbrell.com/f8.jpg',
+          name: '@Soul - My result!',
+          caption: 'Caption description (First description)',
+          description: '@Soul is a revealing new way to explore your personality. In 3 easy steps you\'ll gain a better understanding of yourself and your relationship with others.'
+        };
+
+        function callback(response) {
+          document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+        }
+
+        FB.ui(obj, callback);
+      }
+    
+    </script>
+  </body>
+</html>
+-->
+
+
+<!--
+<html>
+	<head>
+		<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  				api_key: d3spz6hpxxqn
+
+  			IN.API.Profile("me")
+    			.result(function(result) { 
+        		$("#profile").html(JSON.stringify(result)) 
+    		});
+
+    		IN.API.Connections("me")
+    			.result(function(result) { 
+        			$("#connections").html(JSON.stringify(result)) 
+    		});
+		</script>
+
+	</head>
+
+	<body>
+		<script type="in/Login">
+			Hello, <?js= firstName ?> <?js= lastName ?>.
+		</script>
+
+		<script type="IN/Login" data-onAuth="loadData">
+		</script>
+
+	</body>
+
+</html>
+-->

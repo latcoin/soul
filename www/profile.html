@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>@Soul - * Profile Page *</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/loader.js"></script>
+		<script type="text/javascript" src="js/profile.js"></script>
+		<script type="text/javascript" src="js/templates.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.core.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.dialog.css" />
+		<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+		<!--[if gte IE 9]>
+			<style type="text/css">
+				.gradient {
+					filter: none;
+				}
+			</style>
+		<![endif]-->
+	</head>
+
+	<body class="main-background" style="background-position: 0 55px;">
+		<div class="opaque-background"></div>
+		<div class="content">
+			<div class="top-bar">
+				<div class="icon logo small" style="display: inline-block;">
+					<div class="opaque"></div>
+				</div>
+				<!-- <a id="loggedUser" style="display: inline-block;">Logged User's Name</a> -->
+				<div class="credit-number-wrapper">
+					<div class="coin-icon"></div>
+					<div class="number-container">
+						<div class="credit-number">0</div>
+					</div>
+				</div>
+				<!-- <p id="credit" style="display: inline-block;">Credits: 0</p> -->
+				<a id="payments" style="display: inline-block;">Get more credits</a>
+				<div class="search-bar type-1" style="display: inline-block;">
+					<input id="generalSearch" type="text" placeholder="Find anyone">
+					<div class="icon search-right"></div>
+					<div class="autocomplete-container">
+						<div class="result-container"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="fbButtonsArea" style="margin-right: 10px">
+				<div id="messageButton" class="fb-button small gradient">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Message</div>
+					<div class="clear"></div>
+				</div>
+				<div id="shareButton" class="fb-button small gradient">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Share</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="userInfoArea" style="padding: 0 20px; margin-top: 10px">
+				<div class="facebook-id" style="display:none"></div>
+				<div id="pictureOwner" class="profile-pic"></div>
+				<div id="profileInfoWrapper" style="float: left; padding-left: 20px;">
+					<div class="text" id="nameOwnwer" style="font-size: 2.2em; font-weight: bold;">
+						Profile Owner's Name
+					</div>
+				</div>
+				<div id="scoreTrustOwner">
+				</div>
+				<div class="clear"></div>
+				<div id="overallTrust"></div>
+			</div>
+			<div id="lowerSectionContent" style="padding: 0 20px; margin-top: 30px; padding-bottom: 30px;">
+				<div id="personalityInfoArea" style="float: left;width: 70%;">
+					<div class="section-title main">
+						<div class="icon soul-blue" style="float: left;"></div>
+						<div class="text">Personality Traits</div>
+						<div class="clear"></div>
+					</div>
+					<div class="black-container">
+						<div class="section-title">
+							<div class="icon soul-blue" style="float: left;"></div>
+							<div class="text">Core Traits</div>
+							<div class="clear"></div>
+							<hr class="gradient">
+						</div>
+						<div id="coreTraits"></div>
+						<div class="section-title" style="margin-top:15px;">
+							<div class="icon soul-blue" style="float: left;"></div>
+							<div class="text">Sub Traits</div>
+							<div class="clear"></div>
+							<hr class="gradient">
+						</div>
+						<div id="subTraits"></div>
+					</div>
+				</div>
+				<div id="rightSideBar" style="float: right; width: 25%;">
+					<div id="friendsInfoArea">
+						<div class="section-title main">
+							<div class="icon buddy" style="float: left;"></div>
+							<div class="text"><a class="FriendsLink" href='/searchfriends.html?type=friends'> Friends</a></div>
+							<div class="clear"></div>
+						</div>
+						<div>
+							<div style="float:left;font-family: 'SheepSansRegular';font-size: 1em;padding:10px 0;">How well does this person know me?</div>
+							<div style="float:left;position:relative;">
+								<div style="background-image: url(css/images/arrow.gif); width: 45px; height: 45px; background-size: 100%;position:absolute;top:15px;"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					
+					<div id="commentsInfoArea">
+						<div id="commentInput" class="black-container">
+							<textarea id="commentArea" rows="3" cols="25" maxlength="500" ></textarea>
+							<input type="button" id="saveComment" value="Comment">
+							<hr class="gradient" />
+							<div class="commentsArea"></div>
+						</div>
+						<div id="notification-container">
+							<div id="container" style="display:none">
+								<div id="default">
+									<h1>#{title}</h1>
+									<p>#{text}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="loadingDialog">
+			<div class="icon soul-big"></div>
+			<div class="message">
+				<div class="text">Loading</div>
+				<img src="css/images/loading.gif">
+			</div>
+		</div>
+		<div id="paymentDialog">
+			<table width="600px"><tr><td>
+			<div class="leftpayment">
+				<form id="paymentForm" method="post" action="">
+					<table>
+						<tr>
+							<td>Credit Card Number: </td>
+							<td>
+								<input type="text" id="cardNumber" maxlength="16" style="width:155px;"/>
+								<p class="errorMessage" style="font-size:11px"></p>
+							</td>
+						</tr>
+						<tr>
+							<td>CVC: </td>
+							<td>
+								<input type="text" id="cvc" maxlength="3" style="width:36px;"/>
+							</td>
+						</tr>
+						<tr>
+							<td>Expiration (MM/YYYY): </td>
+							<td>
+								<select name="expirationMonth" id="card-expiry-month">
+									<option value="1">01</option>
+									<option value="2">02</option>
+									<option value="3">03</option>
+									<option value="4">04</option>
+									<option value="5">05</option>
+									<option value="6">06</option>
+									<option value="7">07</option>
+									<option value="8">08</option>
+									<option value="9">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								<span> / </span>
+								<select id="expirationYear" name="expirationYear" ></select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:center;">
+								<br />
+								<button type="button" class="paymentCredit">Submit Payment</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			</td><td>
+			<div class="rigthpayment">
+					<p>Pagos</p>
+					<p>Pagos</p>
+					<p>Pagos</p>
+					<p>Pagos</p>
+			</div>
+			</td></tr></table>
+		</div>
+		<div id="traitDescription" class="description-tooltip" style="display: none;"></div>
+	</body>
+</html>

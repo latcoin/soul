@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>@Soul index</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/loader.js"></script>
+		<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+		<script type="text/javascript">
+			Stripe.setPublishableKey('pk_0B9uB5JXHpNvobAhEswf6zxzn4DOp');
+			$(document).ready(function(){
+				$('.submit-payment').click(function(){
+					Stripe.createToken({
+				    	number: $('.card-number').val(),
+				        cvc: $('.card-cvc').val(),
+				        exp_month: $('.card-expiry-month').val(),
+				        exp_year: $('.card-expiry-year').val()
+				    }, function(status, response){
+				    	if(status == 200){
+				    		//get Extra data from the form here... to prepare to send to server
+				    		$.ajax(
+				    			{
+									url: '/actions/purchaseCreditPackage',
+									type: "POST",
+									data: {
+										packageName: 'pack4',
+										stripeToken : response.id,
+
+									},
+									processData: true,
+									dataType: "json",
+									success: function(data) {
+										//try parsing here, is you cant then i sent you an error message that you should print somewhere
+										console.log(parseInt(data));
+									}
+								});
+				    	}else{
+				    		//handle invalid card error here
+				    	}
+				    });
+				});
+			});
+		</script>
+	</head>
+	<body class="main-background">
+		<div class="opaque-background"></div>
+		<div class="content">
+			<div class="payment-form">
+				<div id="payment-form">
+				 	<div class="form-row">
+				    	<label>Card Number</label>
+				    	<input type="text" size="20" autocomplete="off" class="card-number"/>
+				  	</div>
+				  	<div class="form-row">
+				    	<label>CVC</label>
+				    	<input type="text" size="4" autocomplete="off" class="card-cvc"/>
+				  	</div>
+				  	<div class="form-row">
+				    	<label>Expiration (MM/YYYY)</label>
+				    	<input type="text" size="2" class="card-expiry-month"/>
+				    	<span> / </span>
+				    	<input type="text" size="4" class="card-expiry-year"/>
+				  	</div>
+				  	<button type="button" class="submit-payment">Submit Payment</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

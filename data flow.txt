@@ -1,0 +1,117 @@
+Data flow:
+
+- /SetSessionValues //Post
+	* client envia:
+		{
+			token: FB token del usuario logueado
+		}
+
+- /ProfileInfo //Get
+	* client envia:
+		{
+			requestedUser: FB ID del usuario solicitado,
+			loggedUser: FB ID del usuario logueado,
+			token: FB token del usuario logueado
+		}
+	* server:
+		# obtiene los datos de FB del usuario solicitado (nombre, sexo, edad, location y bio) ->  function facebookGetUserInfo(graphUser, token, callback)
+		# obtiene los amigos del usuario logueado -> function facebookGetAppUsers(graphId, token, callback)
+		# selecciona 7 amigos al azar de la lista anterior -> function facebookGetRandomFriens(graphId, token, callback)
+		# obtener de dynamo el score de los traits del usuario solicitado, la evaluacion del usuario actual y el trust score de los 7 amigos seleccionados
+		# retornar al cliente la respuesta de la forma: 
+			{
+				fbData: { //datos del usuario solicitado, 
+					fbID,
+					name,
+					sex,
+					location,
+					bio
+				}
+				globalScores: [ //score actual de los traits del usuario solicitado
+					{
+						trait: nombre del trait,
+						value: valor del score
+					}
+				],  
+				userScores: score actual del usuario logueado, mismo formato que globalScores,
+				friends: [
+					{
+						fbID: facebook ID del amigo,
+						name: nombre del amigo
+						trustScore: trust score del amigo
+					}
+				]
+			}
+
+- /Search //Get
+	* cliente envia: 
+		{
+			name: nombre a buscar,
+			page: numero de pagina a pedir,
+			loggedUser: FB ID del usuario logueado,
+			token: FB token del usuario logueado
+		}
+	* server:
+		# obtiene el nombre en facebook de los usuarios encontrados
+		# busca en dynamo los datos de los usuarios cuyo nombre sea igual al nombre recibido desde el cliente (maximo 20 usuarios)
+			$ si la busqueda acaba de iniciar, se debe obtener el total de usuarios que tienen ese nombre
+
+		# obtiene de dynamo el trust score de los usuarios encontrados
+		# retorna los datos con la forma:
+			{
+				totalUsers: total de usuarios (solo mandarlo la primera vez),
+				foundUsers: [ //lista de usuarios encontrados
+					{
+						fbId: ID de facebook del usuario encontrado,
+						name: nombre del usuario encontrado,
+						trustScore: trust score del usuario encontrado
+					}
+				]
+			}
+		  la busqueda se manejara por paginas y se retorna un maximo de 20 usuarios por pagina
+
+- /ScoreTrait //Post
+	* cliente envia:
+		{
+			evaluatedUser: FB ID del usuario a evaluar,
+			loggedUser: FB ID del usuario logueado,
+			trait: nombre del trait,
+			value: valor del trait
+		}
+	* server:
+		# acumula el valor del trait
+		# retorna:
+			{
+				success: booleano indicando si tuvo exito,
+				detail: especifica detalles de error (enviar solo si el proceso fallo)
+			}
+
+- /SetTrust //Post
+	* cliente envia:
+		{
+			evaluatedUser: FB ID del usuario a evaluar,
+			//loggedUser: FB ID del usuario logueado,
+			value: valor del trust score
+		}
+	* server:
+		# acumula el valor del trust score en dynamo
+		# retorna:
+			{
+				success: booleano indicando si tuvo exito,
+				detail: especifica detalles de error (enviar solo si el proceso fallo)
+			}
+
+- /getTraitList //Post
+	* cliente envia:
+		{}
+	* server:
+		{
+			low:
+			high:
+			description:
+			traitname:
+		}
+
+GET PETITIONS
+- /*
+	Serve files	

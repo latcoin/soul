@@ -1,0 +1,30 @@
+/*!
+ * jQuery UI Slider 1.8.21
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+.trait-slider.ui-slider-horizontal { height: 100%; border-right: 28px solid transparent; position: absolute; top: 0; }
+.trust-slider.ui-slider-horizontal { border: 2px solid rgb(66, 38, 2); background-color: rgb(229, 146, 26); color: #222222; }
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius: 15px; -webkit-border-radius: 15px; -khtml-border-radius: 15px; border-radius: 15px; }
+
+.ui-slider { position: relative; text-align: left; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 2; /*width: 1.2em; height: 1.2em;*/ cursor: default; background-image: url('images/icons v2.png'); background-repeat: no-repeat; }
+.trait-slider .ui-slider-handle { background-position: -281px -0px; width: 28px; height: 32px; margin-left: 0px !important; }
+.trust-slider .ui-slider-handle { background-position: -240px -34px; width: 28px; height: 24px; }
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+
+.ui-slider-horizontal { height: 10px; }
+.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; border-radius: 0; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }

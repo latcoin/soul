@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>@Soul - * Profile Page *</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/loader.js"></script>
+		<script type="text/javascript" src="js/visitor.js"></script>
+		<script type="text/javascript" src="js/templates.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/jquery.ui.dialog.css" media="screen" />
+	</head>
+
+	<body class="main-background" style="background-position: 0 55px;">
+		<div class="opaque-background"></div>
+		<div class="content">
+			<div class="top-bar">
+				<div class="icon logo small" style="display: inline-block;"></div>
+				<a id="loggedUser" style="display: inline-block;">Logged User's Name</a>
+				<div class="search-bar type-1" style="display: inline-block;">
+					<input id="generalSearch" type="text" placeholder="Find anyone">
+					<div class="icon search-right"></div>
+					<div class="autocomplete-container">
+						<div class="result-container"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="fbButtonsArea" style="margin-right: 10px">
+				<div id="messageButton" class="fb-button small">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Message</div>
+					<div class="clear"></div>
+				</div>
+				<div id="shareButton" class="fb-button small">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Share</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="userInfoArea" style="padding: 0 20px; margin-top: 10px">
+				<div class="facebook-id" style="display:none"></div>
+				<div id="pictureOwner" class="profile-pic"></div>
+				<div id="profileInfoWrapper" style="float: left; padding-left: 20px;">
+					<div class="text" id="nameOwnwer" style="font-size: 2.2em; font-weight: bold;">
+						Profile Owner's Name
+					</div>
+				</div>
+				<div id="scoreTrustOwner">
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="lowerSectionContent" style="padding: 0 20px; margin-top: 30px; padding-bottom: 30px;">
+				<div id="personalityInfoArea" style="float: left;width: 70%;">
+					<div class="section-title">
+						<div class="icon soul-blue" style="float: left;"></div>
+						<div class="text">Personality Traits</div>
+						<div class="clear"></div>
+					</div>
+					<div class="black-container">
+					</div>
+				</div>
+				<div id="friendsInfoArea" style="float: right; width: 25%;">
+					<div class="section-title">
+						<div class="icon buddy" style="float: left;"></div>
+						<div class="text"><a href='/searchfriends.html?type=friends'> Friends</a></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+
+	</body>
+	<!--<div id="loader"> <img src="css/images/loader.gif" /> </div>-->
+</html>

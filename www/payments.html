@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>@Soul - * Profile Page *</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/loader.js"></script>
+		<script type="text/javascript" src="js/payments.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.core.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.dialog.css" />
+	</head>
+
+	<body class="main-background" style="background-position: 0 55px;">
+		<div class="opaque-background"></div>
+		<div class="content">
+			<div class="top-bar">
+				<div class="icon logo small" style="display: inline-block;"></div>
+				<a id="loggedUser" style="display: inline-block;">Logged User's Name</a>
+				<div class="search-bar type-1" style="display: inline-block;">
+					<input id="generalSearch" type="text" placeholder="Find anyone">
+					<div class="icon search-right"></div>
+					<div class="autocomplete-container">
+						<div class="result-container"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="fbButtonsArea" style="margin-right: 10px">
+				<div id="messageButton" class="fb-button small">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Message</div>
+					<div class="clear"></div>
+				</div>
+				<div id="shareButton" class="fb-button small">
+					<div class="opaque-background"></div>
+					<div class="opacity-bar"></div>
+					<div class="icon fb small"></div>
+					<div class="text">Share</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="userInfoArea" style="padding: 0 20px; margin-top: 10px">
+				<div class="facebook-id" style="display:none"></div>
+				<div id="pictureOwner" class="profile-pic"></div>
+				<div id="profileInfoWrapper" style="float: left; padding-left: 20px;">
+					<div class="text" id="nameOwnwer" style="font-size: 2.2em; font-weight: bold;">
+						Profile Owner's Name
+					</div>
+				</div>
+				<div id="scoreTrustOwner">
+				</div>
+				<div class="clear"></div>
+				<div id="overallTrust"></div>
+			</div>
+			<div id="lowerSectionContent" style="padding: 0 20px; margin-top: 30px; padding-bottom: 30px;">
+				<div id="personalityInfoArea" style="float: left;width: 70%;">
+					<div class="section-title">
+						<div class="icon soul-blue" style="float: left;"></div>
+						<div class="text">Personality Traits</div>
+						<div class="clear"></div>
+					</div>
+					<div class="black-container">
+						<form id="form">
+							<div class="form-row">
+								<label>Card Number</label>
+								<input type="text" class="textbox" size="20" autocomplete="off" class="card-number"/>
+								<br />
+							</div>
+							<div class="form-row">
+								<label>CVC</label>
+								<input type="text" class="textbox" size="4" autocomplete="off" class="card-cvc"/>
+								<br />
+							</div>
+							<div class="form-row">
+								<label>Expiration (MM/YYYY)</label>
+								<input type="text" class="textbox" size="2" class="card-expiry-month"/>
+								<span> / </span>
+								<input type="text" class="textbox" size="4" class="card-expiry-year"/>
+								<br />
+							</div>
+							<button type="submit" class="submit-button">Submit Payment</button>
+						</form>
+					</div>
+				</div>
+				<div id="rightSideBar" style="float: right; width: 25%;">
+					<div id="friendsInfoArea">
+						<div class="section-title">
+							<div class="icon buddy" style="float: left;"></div>
+							<div class="text"><a class="FriendsLink" href='/searchfriends.html?type=friends'> Friends</a></div>
+							<div class="clear"></div>
+						</div>
+						<div>
+							<div style="float:left;font-family: 'SheepSansRegular';font-size: 1em;">How well does this person know me?</div>
+							<div style="background-image: url(css/images/arrow.gif); width: 30px; height: 30px; background-size: 100%; float: left;"></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					
+					<div id="commentsInfoArea">
+						<div id="commentInput" class="black-container">
+							<textarea id="commentArea" rows="3" cols="25" maxlength="500" ></textarea>
+							<input type="button" id="saveComment" value="Comment">
+							<hr />
+							<div class="commentsArea"></div>
+						</div>
+						<div id="notification-container">
+							<div id="container" style="display:none">
+								<div id="default">
+									<h1>#{title}</h1>
+									<p>#{text}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</body>
+</html>
